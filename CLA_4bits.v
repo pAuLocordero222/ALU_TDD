@@ -23,8 +23,8 @@
 module CLA_4bits #(parameter ancho=4)(
     input [ancho-1:0]a, b, 
     input aluflagin,
-    output reg [ancho-1:0]aluresult, 
-    output reg aluflags
+    output wire [ancho-1:0]aluresult, 
+    output wire aluflags
     );
     
     wire x1;

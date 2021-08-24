@@ -27,6 +27,7 @@ module alu #(parameter ancho=4)(
    output reg [ancho-1:0]ALUResult, 
    output reg ALUFlags
     );
+    
     wire [ancho-1:0]Neg;
     wire [ancho-1:0]LS;
     wire [ancho-1:0]RS;
@@ -34,13 +35,16 @@ module alu #(parameter ancho=4)(
     wire [ancho-1:0]R1;
     wire [ancho-1:0]C;
     wire [ancho-1:0]CLA_SUM;
+    wire Carrysuma;
+    wire Carryresta;
     
     N U1(.a(A), .b(B), .aluflagin(ALUFlagIN), .aluresult(Neg));
     Sum1 U2(.a(A), .b(B), .aluflagin(ALUFlagIN), .aluresult(S1));
     Res1 U3(.a(A), .b(B), .aluflagin(ALUFlagIN), .aluresult(R1));
     LShift U4(.a(A), .b(B), .aluflagin(ALUFlagIN), .aluresult(LS), .aluflags(C));
     RShift U5(.a(A), .b(B), .aluflagin(ALUFlagIN), .aluresult(RS), .aluflags(C));
-    CLA_4bits(.a(A), .b(B), .aluflagin(ALUFlagIN), .aluresult(CLA_SUM), .aluflags(C));
+    CLA_4bits U6(.a(A), .b(B), .aluflagin(ALUFlagIN), .aluresult(CLA_SUM), .aluflags(Carrysuma));
+    Substraction U7(.a(A), .b(B), .aluflagin(ALUFlagIN), .aluresult(CLA_SUM), .aluflags(Carryresta));
     
     always @(*) begin
         case(ALUControl)
@@ -51,7 +55,7 @@ module alu #(parameter ancho=4)(
             4'h2: 
                 begin
                    ALUResult=CLA_SUM;
-                   ALUFlags=C;
+                   ALUFlags=Carrysuma;
                 end
             4'h3: ALUResult=S1;//INCREMENTO EN 1
       
@@ -72,10 +76,10 @@ module alu #(parameter ancho=4)(
                 end
             4'h9:
                 begin  //RIGHT SHIFT             
-                     ALUResult = RS;
-                     ALUFlags = C;             
+                     ALUFlags = C; 
+                     ALUResult = RS;            
                 end
-            default ALUFlags=1'bx;
+            //default ALUFlags=1'b0;
         endcase
     end
 endmodule

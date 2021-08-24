@@ -38,7 +38,7 @@ module LShift #(parameter ancho=4)(
             1'b1: 
                 begin
                     aluflags = a[ancho-b];
-                    ShiftL = (a << b)|1'b0001;
+                    aluresult = (a << b)|1'b0001;
                 end      
         endcase
     end
