@@ -27,6 +27,9 @@ module LShift #(parameter ancho=4)(
     output reg aluflags
     );
     
+    wire [ancho-1:0]ones;
+    
+    assign ones={(ancho-1){1'b1}};
     
      always @(*) begin
         case(aluflagin)
@@ -38,7 +41,7 @@ module LShift #(parameter ancho=4)(
             1'b1: 
                 begin
                     aluflags = a[ancho-b];
-                    aluresult = (a << b)|1'b0001;
+                    aluresult = (a << b)|ones;
                 end      
         endcase
     end
