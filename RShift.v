@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module RShift #(parameter ancho=8)(
+module RShift #(parameter ancho=4)(
     input [ancho-1:0]a, b, 
     input aluflagin,
     output reg [ancho-1:0]aluresult, 
@@ -37,12 +37,12 @@ module RShift #(parameter ancho=8)(
             1'b0: 
                 begin
                     aluflags = a[b-1];
-                    aluresult = (a >> b)|(ones << (ancho-b));
+                    aluresult = (a >> b);
                 end
             1'b1: 
                 begin
                     aluflags = a[b-1];
-                    aluresult = (a >> b) | 4'b0001;
+                    aluresult = (a >> b)|(ones << (ancho-b));
                 end      
         endcase
     end

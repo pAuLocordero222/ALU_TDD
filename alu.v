@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module alu #(parameter ancho=8)(
+module alu #(parameter ancho=4)(
    input [ancho-1:0]A, B,
    input ALUFlagIN, 
    input [3:0]ALUControl,
@@ -50,6 +50,7 @@ module alu #(parameter ancho=8)(
     
     always @(*) begin
         case(ALUControl)
+            default ALUFlags=1'bx;
             4'h0: ALUResult=A&B;//AND
                
             4'h1: ALUResult=A|B;//OR
@@ -82,7 +83,6 @@ module alu #(parameter ancho=8)(
                      ALUFlags = CR; 
                      ALUResult = RS;            
                 end
-            //default ALUFlags=1'b0;
         endcase
     end
 endmodule
