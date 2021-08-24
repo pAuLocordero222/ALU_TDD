@@ -42,7 +42,7 @@ module alu #(parameter ancho=4)(
     
     always @(*) begin
         case(ALUControl)
-            4'h0: ALUResult=A&B;//AND
+            4'h0: ALUResult=A&B;//and
                
             4'h1: ALUResult=A|B;//OR
                
