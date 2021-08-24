@@ -33,22 +33,25 @@ module alu #(parameter ancho=4)(
     wire [ancho-1:0]S1;
     wire [ancho-1:0]R1;
     wire [ancho-1:0]C;
+    wire [ancho-1:0]CLA_SUM;
     
     N U1(.a(A), .b(B), .aluflagin(ALUFlagIN), .aluresult(Neg));
     Sum1 U2(.a(A), .b(B), .aluflagin(ALUFlagIN), .aluresult(S1));
     Res1 U3(.a(A), .b(B), .aluflagin(ALUFlagIN), .aluresult(R1));
     LShift U4(.a(A), .b(B), .aluflagin(ALUFlagIN), .aluresult(LS), .aluflags(C));
     RShift U5(.a(A), .b(B), .aluflagin(ALUFlagIN), .aluresult(RS), .aluflags(C));
+    CLA_4bits(.a(A), .b(B), .aluflagin(ALUFlagIN), .aluresult(CLA_SUM), .aluflags(C));
     
     always @(*) begin
         case(ALUControl)
-            4'h0: ALUResult=A&B;//and
+            4'h0: ALUResult=A&B;//AND
                
             4'h1: ALUResult=A|B;//OR
                
             4'h2: 
                 begin
-                   
+                   ALUResult=CLA_SUM;
+                   ALUFlags=C;
                 end
             4'h3: ALUResult=S1;//INCREMENTO EN 1
       
