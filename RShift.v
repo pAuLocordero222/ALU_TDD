@@ -28,9 +28,9 @@ module RShift #(parameter ancho=4)(
     );
     
     
-    wire [0:ancho-1]ones;
+    wire [ancho-1:0]ones;
     
-    assign ones={(ancho-1){1'b1}};
+    assign ones={(ancho){1'b1}};
     
      always @(*) begin
         case(aluflagin)

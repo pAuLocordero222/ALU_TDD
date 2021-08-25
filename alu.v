@@ -50,7 +50,8 @@ module alu #(parameter ancho=4)(
     
     always @(*) begin
         case(ALUControl)
-            default ALUFlags=1'bx;
+           
+          
             4'h0: ALUResult=A&B;//AND
                
             4'h1: ALUResult=A|B;//OR
@@ -83,6 +84,13 @@ module alu #(parameter ancho=4)(
                      ALUFlags = CR; 
                      ALUResult = RS;            
                 end
+                
+            default: 
+                begin
+                    ALUResult=1'bx;
+                    ALUFlags=1'bx;
+                end
+                
         endcase
     end
 endmodule
