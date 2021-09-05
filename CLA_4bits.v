@@ -53,6 +53,4 @@ module CLA_4bits #(parameter ancho=4)(
     assign aluresult[3]=~((x1&x3&x5&x7)|(x5&x7&x2)|(x7&x4)|x6)^(~x8&x9);
     assign aluflags=~((x1&x3&x5&x7&x9)|(x5&x7&x9&x2)|(x7&x9&x4)|(x9&x6)|x8);
   
-   
-    
 endmodule

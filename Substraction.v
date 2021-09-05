@@ -26,7 +26,6 @@ module Substraction #(parameter ancho=4)(
     output wire [ancho-1:0]aluresult, 
     output wire aluflags
     );
-    
     wire x1;
     wire x2;
     wire x3; 
@@ -56,6 +55,4 @@ module Substraction #(parameter ancho=4)(
     assign aluresult[2]=~((x1&x3&x5)|(x5&x2)|x4)^(~x6&x7);
     assign aluresult[3]=~((x1&x3&x5&x7)|(x5&x7&x2)|(x7&x4)|x6)^(~x8&x9);
     assign aluflags=~((x1&x3&x5&x7&x9)|(x5&x7&x9&x2)|(x7&x9&x4)|(x9&x6)|x8);
-    
-    
 endmodule

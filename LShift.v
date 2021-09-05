@@ -31,7 +31,7 @@ module LShift #(parameter ancho=4)(
  
     assign ones={(ancho){1'b1}};
     
-     always @(*) begin
+    always @(*) begin
         case(aluflagin)
             1'b0: 
                 begin
